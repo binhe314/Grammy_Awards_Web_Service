@@ -42,7 +42,7 @@ public class PostServlet extends HttpServlet {
 			 if (name == " " || name == null || name.isEmpty()) {
 	        		twitter.updateStatus(status);
 	    		}else{
-	        	File photo = new File("/Users/weiyangkelin/desktop/"+name);
+	        	File photo = new File("/Users/binhe/Desktop/"+name);
 	        	
 	        	status.setMedia(photo);
 	            twitter.updateStatus(status);

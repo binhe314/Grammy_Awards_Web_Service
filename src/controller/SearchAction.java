@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.stream.XMLStreamException;
 
+import model.CelebrityDAO;
 import model.Flickr;
 import model.HistoryDAO;
 import model.Model;
@@ -22,6 +23,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import databeans.Celebrity;
 import databeans.History;
 import formbeans.SearchForm;
 import formbeans.TwitterNames;
@@ -31,12 +33,13 @@ public class SearchAction extends Action {
 			.getInstance(SearchForm.class);
 	private UserDAO userDAO;
 	private HistoryDAO historyDAO;
+	private CelebrityDAO celebrityDAO;
 
 
 	public SearchAction(Model model) {
 		userDAO = model.getUserDAO();
 		historyDAO = model.getHistoryDAO();
-
+		celebrityDAO = model.getCelebrityDAO();
 	}
 
 	public String getName() {
@@ -102,6 +105,17 @@ public class SearchAction extends Action {
 			flickr.remove(0);
 			request.setAttribute("flickrs", flickr);
 			
+			Celebrity celeBean = celebrityDAO.read(tag);
+			if (celeBean == null) {
+				celeBean = new Celebrity();
+				celeBean.setFullName(tag);
+				celeBean.setSearchNum(1);
+				celebrityDAO.create(celeBean);
+			} else {
+				celeBean.setSearchNum(celeBean.getSearchNum() + 1);
+				celebrityDAO.update(celeBean);
+			}
+		
 			//Bin, set up Google Chart parameters
 			Calendar calStart = cal;
 			calStart.add(Calendar.DATE, -6);
@@ -132,6 +146,23 @@ public class SearchAction extends Action {
 				
 			request.setAttribute("historyChart", historyChart);
 			
+			//Bin, set up Google chart 2
+			Celebrity celebrityTotal[] = celebrityDAO.match();
+			int totalNum = 0;
+			for (int i = 0; i < celebrityTotal.length; i++) {
+				totalNum += celebrityTotal[i].getSearchNum();
+			}
+			
+			Celebrity celebrityTag[] = celebrityDAO.match(MatchArg.equals("fullName", tag));
+			int totalTag = 0;
+			for (int i = 0; i < celebrityTag.length; i++) {
+				totalTag += celebrityTag[i].getSearchNum();
+			}
+			
+			request.setAttribute("otherNum", totalNum-totalTag);
+			request.setAttribute("tagTotal", totalTag);
+			System.out.println("total is " + totalNum);
+			System.out.println("tag total is"+ totalTag);
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

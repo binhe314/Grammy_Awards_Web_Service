@@ -16,6 +16,8 @@
 <!--Load the AJAX API-->
 <script type="text/javascript"
 	src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
 <!-- Custom Theme files -->
 <link href="./css/style.css" rel='stylesheet' type='text/css' />
@@ -23,27 +25,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="application/x-javascript">
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-
-
-
-
-
-
-
-
-
 </script>
-
 <!-- draw chart to show change of search number -->
 <script type="text/javascript">
 	// Load the Visualization API and the piechart package.
@@ -65,32 +48,12 @@
 	 	data.addColumn('string', 'Date');
 		data.addColumn('number', 'Number of Search');
  
- /* data.addColumn('string', 'Date');
-	data.addColumn('datetime', 'Number of Search'); */
 		// Add data.
 		 data.addRows([
 		<c:forEach var="history" items="${historyChart}" varStatus="status">
 			 ['${history.stringDate}', ${history.searchNum}] ${status.last?'':', '}
 		</c:forEach>
 		]);
-		
-		<%--  data.addRows([
-		<% History historyChart[]=(History[])request.getAttribute("historyChart"); 		
-		for(int i=0;i< historyChart.length-1;i++){%>		
-			[<%=historyChart[i].getStringDate()%>, <%=historyChart[i].getSearchNum()%>], 	              
-			              
-		<%}%>
-			['Mar 19', 15]
-		              ]);  --%>
-		
-		 /* data.addRows([
-		              ['Mike', {v:new Date(2008,1,28), f:'February 28, 2008'}], // Example of specifying actual and formatted values.
-		              ['Bob', new Date(2007,5,1)],                              // More typically this would be done using a
-		              ['Alice', new Date(2006,7,16)],                           // formatter.
-		              ['Frank', new Date(2007,11,28)],
-		              ['Floyd', new Date(2005,3,13)],
-		              ['Fritz', new Date(2011,6,1)]
-		            ]); */
 		 
 		var options = {
 			width : 700,
@@ -112,6 +75,125 @@
 
 		chart.draw(data, options);
 	}
+</script>
+
+<!-- draw hiChart -->
+<script src="./js/dark-unica.js"></script>
+<script type="text/javascript">
+$(function () {
+    $('#chart3').highcharts({
+        chart: {
+            type: 'column',
+            width: 700,
+            heigth: 400,
+            spacingBottom: 15,
+            spacingTop: 10,
+            spacingLeft: 10,
+            spacingRight: 10,
+
+        },
+        title: {
+            text: 'Search number in past 7 days'
+        },
+        
+        xAxis: {
+        	
+            categories: [
+                         
+               <c:forEach var="history" items="${historyChart}" varStatus="status">
+               '${history.stringDate}' ${status.last?'':', '}
+               </c:forEach>
+            ]
+        },
+        yAxis: {
+        	gridLineWidth: 0,
+        	minorGridLineWidth: 0,
+            min: 0,
+            title: {
+                text: 'Number of Search'
+            }
+        },
+        
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '${form.celebrity}',
+            	
+            data: [<c:forEach var="history" items="${historyChart}" varStatus="status">
+			 ${history.searchNum} ${status.last?'':', '}
+				</c:forEach>]
+
+        }]
+    });
+});
+
+</script>
+
+<script type="text/javascript">
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#chart4').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                width: 700,
+                spacingBottom: 15,
+                spacingTop: 10,
+                spacingLeft: 10,
+                spacingRight: 10
+
+            },
+            title: {
+                text: 'Search number percentage among all celebrities'
+            },
+            
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Search number share',
+                data: [
+                    ['Other Celebrities',   ${otherNum}],
+                    {
+                        name: '${form.celebrity}',
+                        y: ${tagTotal},
+                        sliced: true,
+                        selected: true
+                    }
+                ]
+            }]
+        });
+    });
+
+});
+
 </script>
 
 
@@ -231,14 +313,17 @@
 				</div>
 				<!-- related-articals -->
 				<div class="related-articals">
-					<h2>How popular in past 7 days?</h2>
+					<h2>How popular among all celebrities?</h2>
 					<!-- related-albums -->
 					<div class="related-albums">
 						<div id="owl-demo1"
 							style="border: 1px solid #fff; text-align: center; border-collapse: collapse; text-align: center;">
-							<div id="chart2"></div>
+							&nbsp&nbsp<div id="chart4"></div>
+							&nbsp&nbsp<div id="chart3"></div> 
 							
 						</div>
+<!-- 						<div id="chart3"></div>
+ -->						
 					</div>
 				</div>
 				<div class="related-articals">
