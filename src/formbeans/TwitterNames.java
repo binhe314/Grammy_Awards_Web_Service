@@ -44,7 +44,17 @@ public class TwitterNames {
 		}
 		if(name.equalsIgnoreCase("bruno_mars")){
 			return "BrunoMars";
-		}else 
+		}
+		if (name.equalsIgnoreCase("Bastille")){
+			return "bastilledan";
+		}
+		if (name.equalsIgnoreCase("Brandy Clark")){
+			return "TheBrandyClark";
+		}
+		if (name.equalsIgnoreCase("HAIM")) {
+			return "HAIMtheband";
+		}
+		else 
 			return "TheGRAMMYs";
 	}
 }

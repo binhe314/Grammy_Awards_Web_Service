@@ -125,11 +125,12 @@
 		<div class="container">
 			<div class="categories-left">
 				<ul class="options">
-					<a href="search.do?celebrity=bruno_mars">#Bruno Mars</a> &nbsp&nbsp&nbsp&nbsp&nbsp
-					<a href="search.do?celebrity=taylor_swift">#Taylor
-							Swift</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-					<a href="search.do?celebrity=iggy_azalea">#Iggy Azalea</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-					<a href="search.do?celebrity=sam_smith">#Sam Smith</a>
+					<p>
+						Trends :
+						<c:forEach items="${trends}" var="celebrity">
+							<a href="search.do?celebrity=${celebrity.fullName }">#${celebrity.fullName}</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+					</c:forEach>
+					</p>
 			
 				</ul>
 			</div>
@@ -162,7 +163,7 @@
 						
 						<!-- Div to show chart (Number of followers) -->
 							<div id="chart1"></div>
-							<p>Note: Gold = Winner. Gray = Nominees
+							<p><b>Note: Gold = Winner. Gray = Nominees</b></p>
 						</div>
 						<!-- artical-info -->
 					</div>

@@ -79,7 +79,7 @@
 			<div class="categories-left">
 				<ul class="options">
 					<p>
-						Trending :
+						Trends :
 						<c:forEach items="${trends}" var="celebrity">
 							<a href="search.do?celebrity=${celebrity.fullName }">#${celebrity.fullName}</a>&nbsp&nbsp&nbsp&nbsp&nbsp
 					</c:forEach>
@@ -105,8 +105,8 @@
 				<div onclick="location.href='#';" class="artical">
 					<div class="col-md-8 artical-right">
 						<div class="artical-head">
-							<a href="best_new_artist.jsp"><h2>BEST NEW ARTIST</h2>(click
-								to read more)</a> <br>
+							<a href="best_new_artist.jsp"><h2>BEST NEW ARTIST</h2><br><br>
+								(click to know more with popularity comparison)</a>
 							<h3>
 								<a href="search.do?celebrity=sam_smith">Sam Smith</a>
 							</h3>
@@ -341,7 +341,7 @@
 		<div class="copy-right">
 			<div class="container">
 				<p>
-					Design by <a href="#">Stella</a>
+					Design by <a href="#">Donuts</a>
 				</p>
 			</div>
 		</div>

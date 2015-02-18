@@ -250,7 +250,7 @@ $(function () {
 		<div class="container">
 			<div class="categories-left">
 				<ul class="options">
-					<p>Trending : 
+					<p>Trends : 
 					<c:forEach items="${trends}" var="celebrity">
 					<a href="search.do?celebrity=${celebrity.fullName }">#${celebrity.fullName}</a>&nbsp&nbsp&nbsp&nbsp&nbsp
 					</c:forEach>
@@ -390,7 +390,6 @@ $(function () {
 						<br> <input type="submit" name="post" value="Post" /> <input
 							type="hidden" name="celebrity" value="${form.celebrity}" />
 					</form>
-					<p>Note: All tweets made will be prepended with the hashtag #AllAboutGrammmys and #ArtistName for whom you are posting</p>
 						<tag:notloggedin>
 						<a href="signin"><img
 							src="./images/Sign-in-with-Twitter-darker.png" /></a>
@@ -398,6 +397,8 @@ $(function () {
 					<tag:loggedin>
 						<a href="./logout">logout</a>
 					</tag:loggedin>
+					<br><br><p>Note: All tweets made will be prepended with the hashtag #AllAboutGrammmys and #ArtistName for whom you are posting</p>
+					
 					
 				</div>
 			</div>
