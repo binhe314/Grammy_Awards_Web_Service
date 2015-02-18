@@ -48,7 +48,7 @@ public class Controller extends HttpServlet {
 //		Object user = session.getAttribute("user");
 		Twitter twitter1 = (Twitter) request.getSession().getAttribute("twitter");
 		if(twitter1==null){
-			request.setAttribute("message","please login with your twitter account to continue");
+			request.setAttribute("message","Please login with your twitter account to search content");
 			return "index.jsp";
 		}
 	

@@ -40,6 +40,7 @@
 			<div class="top-nav">
 				<span class="menu"> </span>
 				<ul>
+					<li class="active"><a href>${message }</a><li>
 					<li class="active"><a href="index.jsp">Home<span>
 						</span></a></li>
 					<li><a href="awards.jsp">Awards</a></li>
@@ -155,7 +156,7 @@
 			</div>
 			
 			<div class="categories-right">
-			<p> ${message }</p>
+		
 				<form action="search.do" method="POST">
 				<input type="text" placeholder="Search here" name="celebrity" value="${form.celebrity}" required> 
 				<input type="submit" name="action" value="Search" />

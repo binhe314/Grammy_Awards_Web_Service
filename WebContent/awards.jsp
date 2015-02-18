@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>All about the 57th Grammy's</title>
@@ -14,8 +15,10 @@
 <script type="application/x-javascript">
 	
 	
+	
 
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -51,7 +54,7 @@
 					<tag:loggedin>
 						<%-- <li><a href="#">${twitter.screenName}</a></li> --%>
 						<li><a href="#">${name}</a></li>
-						 <li><a href="./logout">logout</a></li> 
+						<li><a href="./logout">logout</a></li>
 					</tag:loggedin>
 					<div class="clearfix"></div>
 				</ul>
@@ -75,11 +78,12 @@
 		<div class="container">
 			<div class="categories-left">
 				<ul class="options">
-					<a href="search.do?celebrity=bruno_mars">#Bruno Mars</a> &nbsp&nbsp&nbsp&nbsp&nbsp
-					<a href="search.do?celebrity=taylor_swift">#Taylor
-							Swift</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-					<a href="search.do?celebrity=iggy_azalea">#Iggy Azalea</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-					<a href="search.do?celebrity=sam_smith">#Sam Smith</a>
+					<p>
+						Trending :
+						<c:forEach items="${trends}" var="celebrity">
+							<a href="search.do?celebrity=${celebrity.fullName }">#${celebrity.fullName}</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+					</c:forEach>
+					</p>
 				</ul>
 			</div>
 			<div class="categories-right">
@@ -101,8 +105,8 @@
 				<div onclick="location.href='#';" class="artical">
 					<div class="col-md-8 artical-right">
 						<div class="artical-head">
-							<a href="best_new_artist.jsp"><h2>BEST NEW ARTIST</h2>(click to read more)</a> 
-							<br>
+							<a href="best_new_artist.jsp"><h2>BEST NEW ARTIST</h2>(click
+								to read more)</a> <br>
 							<h3>
 								<a href="search.do?celebrity=sam_smith">Sam Smith</a>
 							</h3>
@@ -312,8 +316,9 @@
 				</div>
 				<div class="owl-wrapper-outer">
 					<a class="twitter-timeline"
-							href="https://twitter.com/AllAboutGrammy"
-							data-widget-id="566328412265283584"   data-screen-name="AllAboutGrammy" data-theme="dark"></a>
+						href="https://twitter.com/AllAboutGrammy"
+						data-widget-id="566328412265283584"
+						data-screen-name="AllAboutGrammy" data-theme="dark"></a>
 					<script>
 						!function(d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
