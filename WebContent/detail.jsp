@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="twitter4j.Twitter"%>
 <%@ page import="databeans.History" %>
 <%@ page import="formbeans.SearchForm"%>
@@ -293,13 +294,14 @@ $(function () {
 						<div class="artical-details-info-right">
 
 							<p>
-								<strong>Followers: </strong> ${artist.followersCount }
+								<strong> Twitter Followers: </strong><fmt:formatNumber type="number" pattern="###,###,###">${artist.followersCount }</fmt:formatNumber>
 							</p>
 							<p>
 								<strong>Origin:</strong>${ artist.location}
 							</p>
 							<p>
-								<strong>Years active:</strong> ${artist.createdAt }
+								<strong>Years active on Twitter :  </strong><fmt:formatDate type="date" 
+            value="${artist.createdAt }" /></p>
 							</p>
 							<div class="dicription">
 								<p>
@@ -341,9 +343,7 @@ $(function () {
 			</div>
 			<div class="col-md-4 content-right">
 				<div class="artical-details">
-					
-						<h3>Talk to this artist !</h3>
-
+					<h3>Make your tweets and post photos to twitter!</h3>
 						
 						
 						<a class="twitter-timeline"
@@ -364,24 +364,34 @@ $(function () {
 							}(document, "script", "twitter-wjs");
 						</script>
 						<br><br>
-					<h2>Make your tweets!</h2>
+					
 					<p style="color: #d7d7d7;"><li><a href="#">${name}</a></li>
 							</p>
-						<form action="./post"  method="post" enctype="multipart/form-data">
+				<form action="./post" method="post" enctype="multipart/form-data">
+						
+						<textarea cols="40" rows="5" name="text"
+							style="background-color: #d7d7d7"></textarea>
+						<font color="white"> <span id='remainingC'></span></font>
+						<script>$('textarea').keypress(function(){
+
+							    if(this.value.length > 100){
+							        return false;
+							    }
+							    $("#remainingC").html("<font color=\"white\"> Remaining characters : </font>" +(100 - this.value.length));
+							});
+							</script>
 						<table>
-								
-									<tr>
-										<td>Image: </td>
-										<td colspan="2"><input type="file" name="file" value="${filename}"/></td>
-										
-									</tr>
-									
-								</table>
-							<textarea cols="40" rows="5" name="text"
-								style="background-color: #d7d7d7"></textarea>
-							<br> <input type="submit" name="post" value="Post" />
-							<input type="hidden" name="celebrity" value="${form.celebrity}" />
-						</form>
+							<tr>
+								<td><font color="white">Image:</font></td>
+								<td colspan="2">
+								<input type="file" name="file"
+									value="${filename}" /></td>
+							</tr>
+						</table>
+						<br> <input type="submit" name="post" value="Post" /> <input
+							type="hidden" name="celebrity" value="${form.celebrity}" />
+					</form>
+					<p>Note: All tweets made will be prepended with the hashtag #AllAboutGrammmys and #ArtistName for whom you are posting</p>
 						<tag:notloggedin>
 						<a href="signin"><img
 							src="./images/Sign-in-with-Twitter-darker.png" /></a>

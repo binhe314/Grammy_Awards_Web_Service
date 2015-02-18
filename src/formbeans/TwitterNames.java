@@ -18,7 +18,7 @@ public class TwitterNames {
 		if(name.equalsIgnoreCase("Kendrick Lamar")){
 			return "kendricklamar";
 		}
-		if(name.equalsIgnoreCase("Taylor Swift")){
+		if(name.equalsIgnoreCase("Taylor Swift")|| name.equalsIgnoreCase("taylor_swift")){
 			return "taylorswift13";
 		}
 		if(name.equalsIgnoreCase("Beyonce")){
@@ -33,14 +33,17 @@ public class TwitterNames {
 		if(name.equalsIgnoreCase("Carrie Underwood")){
 			return "carrieunderwood";
 		}
-		if(name.equalsIgnoreCase("Iggy Azalea")){
+		if(name.equalsIgnoreCase("Iggy Azalea")|| name.equalsIgnoreCase("iggy_azalea")){
 			return "IGGYAZALEA";
 		}
 		if(name.equalsIgnoreCase("Meghan Trainor")){
 			return "Meghan_Trainor";
 		}
-		if(name.equalsIgnoreCase("Ed Sheeran")){
-			return "edsheeran";
+		if(name.equalsIgnoreCase("Meghan Trainor")){
+			return "Meghan_Trainor";
+		}
+		if(name.equalsIgnoreCase("bruno_mars")){
+			return "BrunoMars";
 		}else 
 			return "TheGRAMMYs";
 	}

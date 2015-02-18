@@ -164,6 +164,9 @@ public class SearchAction extends Action {
 			System.out.println("total is " + totalNum);
 			System.out.println("tag total is"+ totalTag);
 
+			//create a  array of all 
+			ArrayList<Celebrity> ar=new ArrayList<Celebrity>();
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

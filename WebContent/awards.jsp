@@ -312,8 +312,8 @@
 				</div>
 				<div class="owl-wrapper-outer">
 					<a class="twitter-timeline"
-						href="https://twitter.com/search?q=thegrammy%20"
-						data-widget-id="565700360942403586">Tweets about thegrammy </a>
+							href="https://twitter.com/AllAboutGrammy"
+							data-widget-id="566328412265283584"   data-screen-name="AllAboutGrammy" data-theme="dark"></a>
 					<script>
 						!function(d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
